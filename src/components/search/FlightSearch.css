@@ -1,0 +1,923 @@
+/* ---------- Section and card ---------- */
+.fs-section {
+  --fs-panel: #051a40;
+  --fs-line: rgba(255, 255, 255, 0.12);
+  --fs-muted: rgba(255, 255, 255, 0.58);
+
+  position: relative;
+  z-index: 5;
+  /* Rises into the bottom of the hero so it is on screen straight away. */
+  margin-top: -190px;
+  padding: 0 24px 80px;
+  scroll-margin-top: 96px;
+}
+
+.fs-card {
+  position: relative;
+  scroll-margin-top: 96px;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 14px;
+  border-radius: 30px;
+  background: linear-gradient(180deg, rgba(14, 44, 96, 0.72), rgba(3, 20, 52, 0.86));
+  backdrop-filter: blur(28px) saturate(150%);
+  -webkit-backdrop-filter: blur(28px) saturate(150%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 40px 90px -30px rgba(0, 6, 24, 0.95);
+}
+
+/* A thread of sunlight along the top edge, echoing the planet's rim. */
+.fs-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 194, 14, 0.9), transparent);
+  pointer-events: none;
+}
+
+/* ---------- Toolbar ---------- */
+.fs-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 2px 12px;
+}
+
+.fs-trips {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.fs-trip {
+  position: relative;
+  padding: 7px 16px;
+  border-radius: 11px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.25s;
+}
+
+.fs-trip:hover {
+  color: var(--white);
+}
+
+.fs-trip.is-active {
+  color: var(--navy);
+}
+
+.fs-trip:has(:focus-visible),
+.fs-cabin:has(:focus-visible) {
+  outline: 2px solid var(--yellow);
+  outline-offset: 2px;
+}
+
+.fs-trip-thumb {
+  position: absolute;
+  inset: 0;
+  border-radius: 11px;
+  background: var(--yellow);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+.fs-trip-text {
+  position: relative;
+}
+
+.fs-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 13.5px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.fs-switch-track {
+  display: flex;
+  width: 36px;
+  height: 21px;
+  padding: 2px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  transition: background 0.28s;
+}
+
+.fs-switch.is-on .fs-switch-track {
+  justify-content: flex-end;
+  background: var(--yellow);
+}
+
+.fs-switch-dot {
+  display: block;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--white);
+}
+
+.fs-switch.is-on .fs-switch-dot {
+  background: var(--navy);
+}
+
+/* ---------- Fields ---------- */
+.fs-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2.5fr) minmax(0, 1.65fr) minmax(0, 1.1fr) auto;
+  gap: 6px;
+}
+
+.fs-route,
+.fs-dates {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.fs-field {
+  position: relative;
+  min-width: 0;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.fs-field.is-open {
+  z-index: 10;
+}
+
+.fs-thumb {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.fs-field.is-open .fs-thumb {
+  box-shadow:
+    inset 0 0 0 1.5px var(--yellow),
+    0 0 26px -8px rgba(255, 194, 14, 0.7);
+}
+
+.fs-trigger {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 84px;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 20px;
+  background: none;
+  color: var(--white);
+  text-align: left;
+}
+
+.fs-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--fs-muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.fs-field.is-open .fs-label svg {
+  color: var(--yellow);
+}
+
+.fs-value-clip {
+  display: block;
+  overflow: hidden;
+  margin-top: 3px;
+}
+
+.fs-value {
+  display: block;
+  overflow: hidden;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.fs-value.is-empty {
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 500;
+}
+
+.fs-sub {
+  display: block;
+  overflow: hidden;
+  color: var(--fs-muted);
+  font-size: 12px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Room for the swap button that sits between the two airports. */
+.fs-route .fs-field:first-child .fs-trigger {
+  padding-right: 28px;
+}
+
+.fs-route .fs-field:last-child .fs-trigger {
+  padding-left: 28px;
+}
+
+.fs-swap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--navy);
+  box-shadow:
+    0 0 0 4px #0a2a5c,
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.fs-swap:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* The header's button, scaled up to fill the row. */
+.fs-submit {
+  height: 84px;
+  padding: 0 14px 0 24px;
+  gap: 14px;
+  border-radius: 20px;
+  font-size: 16px;
+}
+
+.fs-submit .find-btn-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+}
+
+.fs-submit .plane {
+  top: 12px;
+  left: 12px;
+}
+
+.fs-submit .plane-b {
+  transform: translate(-36px, 36px);
+}
+
+.fs-submit:hover .plane-a {
+  transform: translate(36px, -36px);
+}
+
+.fs-submit:hover .plane-b {
+  transform: translate(0, 0);
+}
+
+.fs-summary-wrap {
+  overflow: hidden;
+}
+
+.fs-summary {
+  padding: 14px 8px 4px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+}
+
+/* ---------- Panels ---------- */
+.fs-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  z-index: 20;
+  padding: 16px;
+  border-radius: 24px;
+  background: var(--fs-panel);
+  color: var(--white);
+  box-shadow:
+    inset 0 0 0 1px var(--fs-line),
+    0 34px 80px -24px rgba(0, 4, 18, 0.95);
+  outline: 0;
+  transform-origin: top center;
+}
+
+.fs-panel.is-up {
+  top: auto;
+  bottom: calc(100% + 10px);
+  transform-origin: bottom center;
+}
+
+.fs-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 24px;
+  margin-bottom: 12px;
+}
+
+.fs-panel-title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.fs-panel-close {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--white);
+}
+
+.fs-panel-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--fs-line);
+}
+
+.fs-panel-actions {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 6px;
+}
+
+.fs-text-btn {
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.fs-text-btn:hover:not(:disabled) {
+  color: var(--white);
+}
+
+.fs-text-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.fs-done-btn {
+  padding: 9px 18px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--yellow);
+  color: var(--navy);
+  font-size: 13.5px;
+  font-weight: 700;
+  transition: transform 0.3s var(--ease);
+}
+
+.fs-done-btn:hover {
+  transform: translateY(-1px);
+}
+
+.fs-card button:focus-visible,
+.fs-panel button:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 2px;
+}
+
+/* Airports */
+.fs-panel--airport {
+  left: 0;
+  width: 400px;
+}
+
+.fs-airport-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  color: var(--fs-muted);
+  transition: box-shadow 0.25s;
+}
+
+.fs-airport-search:focus-within {
+  box-shadow: inset 0 0 0 1.5px var(--yellow);
+  color: var(--yellow);
+}
+
+.fs-airport-search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: none;
+  color: var(--white);
+  font: inherit;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.fs-airport-search input::placeholder {
+  color: var(--fs-muted);
+}
+
+.fs-airport-hint {
+  margin: 14px 8px 6px;
+  color: var(--fs-muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.fs-airport-list {
+  max-height: 300px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  list-style: none;
+}
+
+.fs-airport {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+.fs-airport.is-active {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.fs-airport-code {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 38px;
+  border-radius: 11px;
+  background: rgba(255, 194, 14, 0.14);
+  color: var(--yellow);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  transition: background 0.2s, color 0.2s;
+}
+
+.fs-airport.is-active .fs-airport-code {
+  background: var(--yellow);
+  color: var(--navy);
+}
+
+.fs-airport-text {
+  min-width: 0;
+}
+
+.fs-airport-city {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 700;
+}
+
+.fs-airport-name {
+  display: block;
+  overflow: hidden;
+  color: var(--fs-muted);
+  font-size: 12.5px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.fs-airport-empty {
+  padding: 4px 8px 12px;
+  color: var(--fs-muted);
+  font-size: 14px;
+}
+
+/* Calendar */
+.fs-panel--dates {
+  left: 50%;
+  width: 664px;
+  margin-left: -332px;
+}
+
+.fs-cal-nav {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  z-index: 2;
+  display: flex;
+  gap: 4px;
+}
+
+.fs-sheet .fs-cal-nav {
+  top: 58px;
+  right: 16px;
+}
+
+.fs-cal-arrow {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--white);
+  transition: background 0.2s;
+}
+
+.fs-cal-arrow:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.fs-cal-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.fs-cal-window {
+  overflow: hidden;
+}
+
+.fs-cal-months {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.fs-cal-title {
+  margin: 4px 4px 10px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.fs-cal-row {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.fs-cal-weekday {
+  padding-bottom: 6px;
+  color: var(--fs-muted);
+  font-size: 11.5px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.fs-day-cell {
+  display: block;
+  height: 42px;
+  padding: 1px 0;
+  background-clip: content-box;
+}
+
+.fs-day-cell.in-range {
+  background-color: rgba(255, 194, 14, 0.24);
+}
+
+.fs-day-cell.in-range:first-child {
+  border-radius: 12px 0 0 12px;
+}
+
+.fs-day-cell.in-range:last-child {
+  border-radius: 0 12px 12px 0;
+}
+
+.fs-day-cell.range-start {
+  background-image: linear-gradient(90deg, transparent 50%, rgba(255, 194, 14, 0.24) 50%);
+}
+
+.fs-day-cell.range-end {
+  background-image: linear-gradient(90deg, rgba(255, 194, 14, 0.24) 50%, transparent 50%);
+}
+
+.fs-day {
+  position: relative;
+  display: block;
+  width: 40px;
+  max-width: 100%;
+  height: 40px;
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+  border-radius: 13px;
+  background: none;
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.18s, color 0.18s, transform 0.25s var(--ease);
+}
+
+.fs-day:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.fs-day:disabled {
+  color: rgba(255, 255, 255, 0.22);
+  cursor: default;
+}
+
+.fs-day.is-today::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 6px;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background: var(--yellow);
+}
+
+.fs-day.is-preview {
+  background: rgba(255, 194, 14, 0.3);
+}
+
+.fs-day.is-selected,
+.fs-day.is-selected:hover:not(:disabled) {
+  background: var(--yellow);
+  color: var(--navy);
+  font-weight: 700;
+  box-shadow: 0 8px 20px -8px rgba(255, 194, 14, 0.9);
+}
+
+.fs-day.is-selected.is-today::after {
+  background: var(--navy);
+}
+
+.fs-cal-summary {
+  min-width: 0;
+  color: var(--fs-muted);
+  font-size: 13px;
+}
+
+/* Travellers */
+.fs-panel--travellers {
+  right: 0;
+  width: 360px;
+}
+
+.fs-pax {
+  display: grid;
+}
+
+.fs-pax-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 2px;
+}
+
+.fs-pax-row + .fs-pax-row {
+  border-top: 1px solid var(--fs-line);
+}
+
+.fs-pax-label {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 700;
+}
+
+.fs-pax-hint {
+  display: block;
+  color: var(--fs-muted);
+  font-size: 12.5px;
+}
+
+.fs-stepper {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 4px;
+}
+
+.fs-stepper button {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--white);
+  transition: background 0.2s, color 0.2s;
+}
+
+.fs-stepper button:hover:not(:disabled) {
+  background: var(--yellow);
+  color: var(--navy);
+}
+
+.fs-stepper button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.fs-stepper-value {
+  display: block;
+  width: 30px;
+  overflow: hidden;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.fs-stepper-value span {
+  display: block;
+}
+
+.fs-cabin-title {
+  margin: 12px 2px 8px;
+  font-size: 14.5px;
+  font-weight: 700;
+}
+
+.fs-cabins {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.fs-cabin {
+  position: relative;
+  padding: 10px 8px;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13.5px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.fs-cabin:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.fs-cabin.is-active {
+  color: var(--navy);
+}
+
+.fs-cabin-thumb {
+  position: absolute;
+  inset: 0;
+  border-radius: 13px;
+  background: var(--yellow);
+}
+
+.fs-cabin-text {
+  position: relative;
+}
+
+/* ---------- Bottom sheet (phones) ---------- */
+.fs-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 1190;
+  background: rgba(0, 12, 32, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.fs-panel.fs-sheet {
+  position: fixed;
+  top: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1200;
+  width: auto;
+  max-height: 88svh;
+  margin: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 18px 16px calc(18px + env(safe-area-inset-bottom));
+  border-radius: 26px 26px 0 0;
+  --fs-panel: #051a40;
+  --fs-line: rgba(255, 255, 255, 0.12);
+  --fs-muted: rgba(255, 255, 255, 0.58);
+}
+
+.fs-sheet .fs-cal-months {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.fs-sheet .fs-cal-title {
+  margin-top: 8px;
+  margin-bottom: 18px;
+}
+
+.fs-sheet .fs-day-cell {
+  height: 46px;
+}
+
+.fs-sheet .fs-day {
+  width: 44px;
+  height: 44px;
+}
+
+.fs-sheet .fs-airport-list {
+  max-height: 46svh;
+}
+
+/* ---------- Breakpoints ---------- */
+@media (max-width: 1140px) {
+  .fs-section {
+    margin-top: -250px;
+  }
+  .fs-grid {
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  }
+  .fs-route {
+    grid-column: 1 / -1;
+  }
+  .fs-submit {
+    grid-column: 1 / -1;
+    justify-content: center;
+    height: 66px;
+  }
+  .fs-panel--dates {
+    left: 0;
+    width: min(664px, calc(100vw - 76px));
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 719px) {
+  .fs-section {
+    margin-top: -210px;
+    padding: 0 12px 56px;
+  }
+  .fs-card {
+    padding: 10px;
+    border-radius: 26px;
+  }
+  .fs-toolbar {
+    flex-wrap: wrap;
+  }
+  .fs-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .fs-route {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .fs-route .fs-field:first-child .fs-trigger,
+  .fs-route .fs-field:last-child .fs-trigger {
+    padding: 10px 56px 10px 14px;
+  }
+  .fs-swap {
+    left: auto;
+    right: 14px;
+    margin-left: 0;
+  }
+  .fs-swap svg {
+    rotate: 90deg;
+  }
+  .fs-trigger {
+    height: 76px;
+    padding: 10px 14px;
+  }
+  .fs-trigger .fs-value {
+    font-size: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fs-card *,
+  .fs-panel * {
+    transition-duration: 0.01ms !important;
+  }
+}

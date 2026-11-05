@@ -1,0 +1,413 @@
+.th {
+  max-width: 1288px;
+  margin: 0 auto;
+  padding: 72px 24px 110px;
+  scroll-margin-top: 80px;
+}
+
+.th-head {
+  margin-bottom: 40px;
+}
+
+/* ---------- Topic cards ---------- */
+.th-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.th-tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  padding: 16px;
+  border: 0;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.09);
+  color: var(--white);
+  text-align: left;
+  transition: background 0.3s, color 0.3s;
+}
+
+.th-tab:hover {
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.th-tab.is-active {
+  background: transparent;
+  color: var(--navy);
+}
+
+.th-tab:focus-visible,
+.th-copy:focus-visible,
+.th-email:focus-visible,
+.th-channel-link:focus-visible,
+.th-send:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 3px;
+}
+
+.th-tab-thumb {
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  background: var(--yellow);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 20px 44px -22px rgba(255, 194, 14, 0.8);
+}
+
+.th-tab-icon {
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 15px;
+  background: rgba(255, 194, 14, 0.14);
+  color: var(--yellow);
+  transition: background 0.3s, color 0.3s;
+}
+
+.th-tab.is-active .th-tab-icon {
+  background: var(--navy);
+  color: var(--yellow);
+}
+
+.th-tab-copy {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.th-tab-title {
+  display: block;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.th-tab-text {
+  display: block;
+  margin-top: 1px;
+  color: var(--text-muted);
+  font-size: 13.5px;
+  transition: color 0.3s;
+}
+
+.th-tab.is-active .th-tab-text {
+  color: rgba(0, 38, 90, 0.75);
+}
+
+.th-tab-arrow {
+  position: relative;
+  flex: none;
+  opacity: 0.55;
+  transition: transform 0.4s var(--ease), opacity 0.3s;
+}
+
+.th-tab:hover .th-tab-arrow,
+.th-tab.is-active .th-tab-arrow {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+/* ---------- Panel ---------- */
+.th-panel {
+  overflow: hidden;
+  border-radius: 28px;
+  background: rgba(0, 12, 34, 0.5);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.09);
+}
+
+.th-panel-body {
+  display: grid;
+  min-height: 262px;
+  padding: 30px;
+}
+
+/* The route the plane flies above the steps */
+.th-track {
+  position: relative;
+  height: 2px;
+  margin: 8px 0 30px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.th-track-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(255, 194, 14, 0.2), var(--yellow));
+}
+
+.th-track-plane {
+  position: absolute;
+  top: 50%;
+  right: -2px;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin-top: -15px;
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--navy);
+  box-shadow: 0 0 22px -2px rgba(255, 194, 14, 0.8);
+}
+
+/* Lucide's plane points up and to the right; this levels it along the route. */
+.th-track-plane svg {
+  rotate: 45deg;
+}
+
+.th-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.th-step-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: rgba(255, 194, 14, 0.14);
+  color: var(--yellow);
+}
+
+.th-step-count {
+  display: block;
+  margin-top: 18px;
+  color: var(--yellow);
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.th-step h3,
+.th-channel h3 {
+  color: var(--white);
+  font-size: 18px;
+  letter-spacing: -0.015em;
+}
+
+.th-step h3 {
+  margin-top: 5px;
+}
+
+.th-step p,
+.th-channel p {
+  margin-top: 6px;
+  color: var(--text-muted);
+  font-size: 14.5px;
+}
+
+/* Agent details */
+.th-channels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.th-channel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.th-channel-link {
+  display: inline-block;
+  margin-top: 6px;
+  color: var(--yellow);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.th-channel-link:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Action bar ---------- */
+.th-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px 18px 18px 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.th-action-email {
+  min-width: 0;
+}
+
+.th-action-label {
+  display: block;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.th-action-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  margin-top: 2px;
+}
+
+.th-email {
+  color: var(--white);
+  font-size: clamp(17px, 2vw, 21px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background-image: linear-gradient(var(--yellow), var(--yellow));
+  background-size: 0 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.35s var(--ease);
+}
+
+.th-email:hover {
+  background-size: 100% 2px;
+}
+
+.th-copy {
+  display: inline-grid;
+  height: 32px;
+  overflow: hidden;
+  padding: 0 11px;
+  border: 0;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.09);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.25s, color 0.25s;
+}
+
+.th-copy:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.th-copy.is-done {
+  background: var(--yellow);
+  color: var(--navy);
+}
+
+.th-copy-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.th-send {
+  height: 54px;
+  padding: 0 10px 0 22px;
+  border-radius: 16px;
+  font-size: 15.5px;
+  flex: none;
+}
+
+.th-send .find-btn-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+}
+
+.th-send .plane {
+  top: 9.5px;
+  left: 9.5px;
+}
+
+.th-send .plane-b {
+  transform: translate(-30px, 30px);
+}
+
+.th-send:hover .plane-a {
+  transform: translate(30px, -30px);
+}
+
+.th-send:hover .plane-b {
+  transform: translate(0, 0);
+}
+
+/* ---------- Smaller screens ---------- */
+@media (max-width: 980px) {
+  .th-tabs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .th-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .th-tab-arrow {
+    rotate: 90deg;
+  }
+}
+
+@media (max-width: 620px) {
+  .th {
+    padding: 48px 16px 72px;
+  }
+  .th-head {
+    margin-bottom: 28px;
+  }
+  .th-panel {
+    border-radius: 24px;
+  }
+  .th-panel-body {
+    padding: 22px 18px;
+  }
+  .th-steps {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+  }
+  .th-step {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    column-gap: 14px;
+  }
+  .th-step-icon {
+    grid-row: span 3;
+  }
+  .th-step-count {
+    margin-top: 0;
+  }
+  .th-action {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 18px;
+  }
+  .th-send {
+    justify-content: space-between;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .th *,
+  .th {
+    transition-duration: 0.01ms !important;
+  }
+}

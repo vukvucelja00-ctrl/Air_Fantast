@@ -1,0 +1,90 @@
+:root {
+  /* Brand (Air Fantast brand book) */
+  --navy: #00265a;
+  --yellow: #ffc20e;
+
+  /* Neutrals */
+  --navy-deep: #001a40;
+  --white: #ffffff;
+  --bg: var(--navy);
+  --text: var(--white);
+  --text-muted: rgba(255, 255, 255, 0.7);
+
+  /* Surfaces on top of the navy background (header, cards) */
+  --frame: var(--white);
+  --frame-text: var(--navy);
+  --frame-muted: #5b6b85;
+  --frame-hover: #eef2f8;
+  --frame-border: #e3e8f0;
+
+  --ease: cubic-bezier(0.23, 1, 0.32, 1);
+
+  /* Nimbus Sans is the brand font; Helvetica is its near-identical fallback */
+  --sans: 'Nimbus Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  color-scheme: light;
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Sections reached from a link take focus for keyboard users, without a visible ring. */
+section[tabindex='-1']:focus {
+  outline: none;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}

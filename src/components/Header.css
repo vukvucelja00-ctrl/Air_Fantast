@@ -1,0 +1,671 @@
+/* ---------- Layout: two floating groups ---------- */
+.hdr {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 24px 0;
+  pointer-events: none;
+}
+
+.hdr > * {
+  pointer-events: auto;
+}
+
+/* ---------- Left: yellow pill ---------- */
+.hdr-pill {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 58px;
+  padding: 6px;
+  border-radius: 20px;
+  background: var(--yellow);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -1px 0 rgba(0, 38, 90, 0.08),
+    0 14px 36px -16px rgba(0, 8, 25, 0.7);
+  transition: box-shadow 0.5s var(--ease);
+}
+
+.is-condensed .hdr-pill {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -1px 0 rgba(0, 38, 90, 0.08),
+    0 22px 50px -14px rgba(0, 8, 25, 0.95);
+}
+
+.hdr-logo {
+  display: grid;
+  place-items: center;
+  height: 46px;
+  padding: 0 14px 0 12px;
+  border-radius: 14px;
+  transition: background 0.3s;
+}
+
+.hdr-logo img {
+  height: 27px;
+  width: auto;
+  transition: transform 0.45s var(--ease);
+}
+
+.hdr-logo:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.hdr-logo:hover img {
+  transform: translateX(2px) rotate(-3deg);
+}
+
+.hdr-divider {
+  width: 1px;
+  height: 22px;
+  margin: 0 6px 0 2px;
+  background: rgba(0, 38, 90, 0.18);
+}
+
+/* Desktop links */
+.nav-row {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-thumb {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.42);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 4px 12px -6px rgba(0, 38, 90, 0.35);
+}
+
+.nav-thumb::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 7px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--navy);
+}
+
+.nav-link {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 46px;
+  padding: 0 14px;
+  border: 0;
+  background: none;
+  color: var(--navy);
+  font-size: 14.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0.78;
+  transition: opacity 0.25s;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible,
+.nav-link[aria-expanded='true'] {
+  opacity: 1;
+}
+
+.nav-chevron {
+  transition: transform 0.3s var(--ease);
+}
+
+.nav-link[aria-expanded='true'] .nav-chevron {
+  transform: rotate(180deg);
+}
+
+/* Dropdowns */
+.dropdown-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 300px;
+  padding-top: 16px;
+  transform-origin: top left;
+}
+
+.dropdown-card {
+  padding: 8px;
+  border-radius: 20px;
+  background: var(--frame);
+  border: 1px solid var(--frame-border);
+  box-shadow: 0 28px 56px -22px rgba(0, 10, 30, 0.6);
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  transition: background 0.2s;
+}
+
+.dropdown-item:hover {
+  background: var(--frame-hover);
+}
+
+.dropdown-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: rgba(255, 194, 14, 0.2);
+  color: var(--navy);
+  transition: background 0.25s, transform 0.3s var(--ease);
+}
+
+.dropdown-item:hover .dropdown-icon {
+  background: var(--yellow);
+  transform: scale(1.06) rotate(-4deg);
+}
+
+.dropdown-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--frame-text);
+}
+
+.dropdown-desc {
+  display: block;
+  margin-top: 1px;
+  font-size: 12.5px;
+  color: var(--frame-muted);
+}
+
+/* Burger (shown below the desktop breakpoint) */
+.hdr-burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  margin-left: 2px;
+  border: 0;
+  border-radius: 14px;
+  background: rgba(0, 38, 90, 0.08);
+  color: var(--navy);
+  transition: background 0.25s;
+}
+
+.hdr-burger:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.burger {
+  position: relative;
+  display: block;
+  width: 18px;
+  height: 10px;
+}
+
+.burger > span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+/* ---------- Right: ticket search ---------- */
+.hdr-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ticket-search {
+  display: flex;
+  align-items: center;
+}
+
+.ticket-search input {
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: none;
+  font: inherit;
+  font-size: 14.5px;
+  font-weight: 500;
+}
+
+.ticket-search-icon {
+  flex: none;
+  transition: color 0.3s, transform 0.4s var(--ease);
+}
+
+.ticket-search:focus-within .ticket-search-icon {
+  transform: rotate(-12deg) scale(1.08);
+}
+
+.ticket-search--header {
+  height: 58px;
+  padding: 6px 6px 6px 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 14px 36px -18px rgba(0, 8, 25, 0.8);
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.ticket-search--header:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.ticket-search--header:focus-within {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 194, 14, 0.6);
+  box-shadow:
+    0 0 0 4px rgba(255, 194, 14, 0.14),
+    0 14px 36px -18px rgba(0, 8, 25, 0.8);
+}
+
+.ticket-search--header .ticket-search-icon {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.ticket-search--header:focus-within .ticket-search-icon {
+  color: var(--yellow);
+}
+
+.ticket-search--header input {
+  width: 210px;
+  padding: 0 14px 0 10px;
+  color: var(--white);
+  transition: width 0.5s var(--ease);
+}
+
+.ticket-search--header input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.ticket-search--header:focus-within input {
+  width: 260px;
+}
+
+/* The yellow button */
+.find-btn {
+  position: relative;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 46px;
+  padding: 0 8px 0 18px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 14px;
+  background: var(--yellow);
+  color: var(--navy);
+  font-size: 14.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 8px 22px -10px rgba(255, 194, 14, 0.75);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+
+.find-btn:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 14px 30px -10px rgba(255, 194, 14, 0.9);
+}
+
+.find-btn:active {
+  transform: scale(0.97);
+}
+
+.find-btn-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.8) 50%, transparent 65%);
+  transform: translateX(-130%);
+  animation: find-shine-idle 6s var(--ease) 2.4s infinite;
+  pointer-events: none;
+}
+
+.find-btn:hover .find-btn-shine {
+  animation: find-shine 0.8s var(--ease) forwards;
+}
+
+.find-btn-label {
+  position: relative;
+}
+
+.find-btn-icon {
+  position: relative;
+  display: block;
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--navy);
+  color: var(--yellow);
+  transition: transform 0.45s var(--ease);
+}
+
+.find-btn:hover .find-btn-icon {
+  transform: rotate(-6deg);
+}
+
+.plane {
+  position: absolute;
+  top: 7.5px;
+  left: 7.5px;
+  transition: transform 0.5s var(--ease);
+}
+
+.plane-b {
+  transform: translate(-26px, 26px);
+}
+
+.find-btn:hover .plane-a {
+  transform: translate(26px, -26px);
+}
+
+.find-btn:hover .plane-b {
+  transform: translate(0, 0);
+  transition-delay: 0.08s;
+}
+
+@keyframes find-shine-idle {
+  0%,
+  82% {
+    transform: translateX(-130%);
+  }
+  100% {
+    transform: translateX(130%);
+  }
+}
+
+@keyframes find-shine {
+  from {
+    transform: translateX(-130%);
+  }
+  to {
+    transform: translateX(130%);
+  }
+}
+
+/* Small screens: the search collapses into a yellow button */
+.hdr-search-btn {
+  display: none;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border: 0;
+  border-radius: 18px;
+  background: var(--yellow);
+  color: var(--navy);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 14px 36px -16px rgba(0, 8, 25, 0.7);
+  transition: transform 0.35s var(--ease);
+}
+
+.hdr-search-btn:active {
+  transform: scale(0.94);
+}
+
+/* ---------- Mobile panel ---------- */
+.m-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 998;
+  border: 0;
+  background: rgba(0, 16, 40, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  cursor: default;
+}
+
+.m-panel {
+  position: fixed;
+  top: 84px;
+  left: 12px;
+  right: 12px;
+  z-index: 999;
+  max-height: calc(100svh - 100px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 10px;
+  border-radius: 26px;
+  background: var(--frame);
+  color: var(--frame-text);
+  box-shadow: 0 30px 80px -24px rgba(0, 8, 25, 0.9);
+  transform-origin: top left;
+}
+
+.ticket-search--panel {
+  height: 58px;
+  padding: 6px 6px 6px 16px;
+  border-radius: 18px;
+  background: #f2f5fa;
+  border: 1px solid var(--frame-border);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.ticket-search--panel:focus-within {
+  border-color: var(--yellow);
+  box-shadow: 0 0 0 4px rgba(255, 194, 14, 0.2);
+}
+
+.ticket-search--panel .ticket-search-icon {
+  color: var(--frame-muted);
+}
+
+.ticket-search--panel:focus-within .ticket-search-icon {
+  color: var(--navy);
+}
+
+.ticket-search--panel input {
+  flex: 1;
+  padding: 0 10px;
+  color: var(--navy);
+}
+
+.ticket-search--panel input::placeholder {
+  color: var(--frame-muted);
+}
+
+.m-nav {
+  margin-top: 6px;
+}
+
+.m-row + .m-row {
+  border-top: 1px solid var(--frame-border);
+}
+
+.m-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 15px 10px;
+  border: 0;
+  border-radius: 14px;
+  background: none;
+  color: var(--frame-text);
+  font-size: 18px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.m-arrow {
+  color: var(--frame-muted);
+  transition: transform 0.3s var(--ease), color 0.3s;
+}
+
+.m-link:hover .m-arrow {
+  color: var(--navy);
+  transform: translate(2px, -2px);
+}
+
+.m-chevron {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #f2f5fa;
+  color: var(--frame-muted);
+  transition: background 0.3s, color 0.3s;
+}
+
+.m-chevron svg {
+  transition: transform 0.3s var(--ease);
+}
+
+.m-chevron.is-open {
+  background: var(--yellow);
+  color: var(--navy);
+}
+
+.m-chevron.is-open svg {
+  transform: rotate(180deg);
+}
+
+.m-sub {
+  overflow: hidden;
+}
+
+.m-sub-inner {
+  display: grid;
+  gap: 2px;
+  padding: 0 4px 10px;
+}
+
+.m-sub-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 6px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--frame-text);
+}
+
+.m-sub-icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: rgba(255, 194, 14, 0.2);
+  color: var(--navy);
+}
+
+/* ---------- Focus + utilities ---------- */
+.hdr a:focus-visible,
+.hdr button:focus-visible,
+.m-panel a:focus-visible,
+.m-panel button:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+}
+
+.hdr-right button:focus-visible,
+.m-panel .find-btn:focus-visible {
+  outline-color: var(--yellow);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Breakpoints ---------- */
+@media (max-width: 1260px) {
+  .nav-link {
+    padding: 0 11px;
+  }
+  .ticket-search--header input {
+    width: 206px;
+  }
+  .ticket-search--header:focus-within input {
+    width: 236px;
+  }
+}
+
+@media (max-width: 1240px) {
+  .nav-row,
+  .hdr-divider {
+    display: none;
+  }
+  .hdr-burger {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 720px) {
+  .hdr {
+    padding: 14px 12px 0;
+  }
+  .hdr-pill {
+    height: 54px;
+    padding: 4px;
+    border-radius: 18px;
+  }
+  .hdr-logo img {
+    height: 24px;
+  }
+  .hdr-search {
+    display: none;
+  }
+  .hdr-search-btn {
+    display: grid;
+  }
+  .m-panel {
+    top: 80px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .find-btn-shine {
+    animation: none;
+  }
+  .hdr *,
+  .m-panel * {
+    transition-duration: 0.01ms !important;
+  }
+}

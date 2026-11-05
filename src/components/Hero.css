@@ -1,0 +1,171 @@
+.hero {
+  position: relative;
+  height: 100svh;
+  min-height: 640px;
+  overflow: hidden;
+  background: #000c22;
+}
+
+.hero-earth {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 100%;
+}
+
+/* The planet loads after the headline, so it fades in rather than popping. */
+.hero-earth > * {
+  animation: hero-earth-in 0.9s ease-out both;
+}
+
+@keyframes hero-earth-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(120% 70% at 50% 0%, rgba(0, 12, 34, 0.8) 0%, rgba(0, 12, 34, 0.35) 45%, transparent 70%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(150px, 23vh, 250px) 16px 0;
+  text-align: center;
+  pointer-events: none;
+}
+
+.hero-content > * {
+  pointer-events: auto;
+}
+
+/* Badge */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 36px;
+  margin-bottom: 30px;
+  padding: 0 12px 0 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  font-weight: 500;
+  transition: color 0.5s, box-shadow 0.5s;
+}
+
+.hero-badge:hover {
+  color: var(--white);
+  box-shadow: inset 0 0 0 1px rgba(255, 194, 14, 0.55);
+}
+
+.hero-badge-dot {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 8px;
+  height: 8px;
+}
+
+.hero-badge-dot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--yellow);
+  animation: hero-pulse 1.8s ease-out infinite;
+}
+
+.hero-badge-dot span {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--yellow);
+  box-shadow: 0 0 10px rgba(255, 194, 14, 0.9);
+}
+
+.hero-badge-arrow {
+  color: var(--yellow);
+  transition: transform 0.5s var(--ease);
+}
+
+.hero-badge:hover .hero-badge-arrow {
+  transform: translateX(3px);
+}
+
+@keyframes hero-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(3.2);
+    opacity: 0;
+  }
+}
+
+/* Headline */
+.hero-title {
+  color: var(--white);
+  font-size: clamp(46px, 10vw, 142px);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+}
+
+.hero-line {
+  display: block;
+}
+
+.hero-word {
+  display: inline-block;
+  padding-bottom: 0.06em;
+}
+
+.hero-word + .hero-word {
+  margin-left: 0.22em;
+}
+
+.hero-word--brand {
+  padding-right: 0.04em;
+  background: linear-gradient(180deg, #ffe27a 0%, var(--yellow) 55%, #f5a700 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-word--soft {
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: -0.035em;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+/* Bottom edge melts into the page navy */
+.hero-fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 18%;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent, var(--navy));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-badge-dot::before,
+  .hero-earth > * {
+    animation: none;
+  }
+}
