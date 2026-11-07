@@ -9,7 +9,7 @@ type Reason = { icon: LucideIcon; title: string; text: string }
 const lead: Reason = {
   icon: Headset,
   title: 'A real person on your booking',
-  text: 'Talk to an agent who knows your trip by name, not a chatbot or a call centre queue. From the first search to the day you land, you know exactly who to ask.',
+  text: 'Talk to an agent who knows your trip by name, not a call centre queue. From the first search to the day you land, you know exactly who to ask.',
 }
 
 const reasons: Reason[] = [

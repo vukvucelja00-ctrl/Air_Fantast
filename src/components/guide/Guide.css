@@ -1,0 +1,372 @@
+/* Sits under the header (1000) and the mobile sheets (1190+), above the page. */
+.guide {
+  position: fixed;
+  right: 24px;
+  bottom: 20px;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.guide > * {
+  pointer-events: auto;
+}
+
+/* ---------- Eagle ---------- */
+.guide-perch {
+  position: relative;
+  margin-right: 6px;
+}
+
+.guide-eagle {
+  display: block;
+  padding: 0;
+  border: 0;
+  border-radius: 14px;
+  background: none;
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 10px 18px rgba(0, 8, 20, 0.55));
+}
+
+.guide-eagle.is-flying {
+  pointer-events: none;
+}
+
+.guide-eagle:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 6px;
+}
+
+.guide-feathers {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  pointer-events: none;
+}
+
+.guide-feathers span {
+  position: absolute;
+  display: block;
+}
+
+/* ---------- Greeting ---------- */
+.guide-bubble {
+  position: relative;
+  width: max-content;
+  max-width: 260px;
+  margin-right: 8px;
+  padding: 16px;
+  border-radius: 20px 20px 6px 20px;
+  background: var(--white);
+  color: var(--navy);
+  box-shadow: 0 24px 60px -18px rgba(0, 8, 20, 0.85);
+  transform-origin: 100% 100%;
+}
+
+.guide-bubble-text {
+  min-height: 1.4em;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.guide-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 1px;
+  background: currentColor;
+  vertical-align: -0.12em;
+  animation: guide-caret 0.9s steps(1) infinite;
+}
+
+@keyframes guide-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+.guide-bubble-actions {
+  overflow: hidden;
+}
+
+.guide-bubble-actions > div {
+  display: flex;
+  gap: 6px;
+  padding-top: 12px;
+}
+
+.guide-yes,
+.guide-no {
+  height: 36px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 12px;
+  font-size: 13.5px;
+  font-weight: 700;
+  transition: transform 0.15s, background 0.25s;
+}
+
+.guide-yes {
+  background: var(--yellow);
+  color: var(--navy);
+}
+
+.guide-no {
+  background: rgba(0, 38, 90, 0.08);
+  color: rgba(0, 38, 90, 0.75);
+}
+
+.guide-no:hover {
+  background: rgba(0, 38, 90, 0.14);
+}
+
+.guide-yes:active,
+.guide-no:active {
+  transform: scale(0.95);
+}
+
+/* ---------- Chat ---------- */
+.guide-chat {
+  display: flex;
+  flex-direction: column;
+  width: min(380px, calc(100vw - 32px));
+  height: min(540px, calc(100svh - 150px));
+  overflow: hidden;
+  border-radius: 26px;
+  background: linear-gradient(180deg, #06275e, #001a40 60%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 40px 100px -24px rgba(0, 6, 18, 0.95);
+  transform-origin: 100% 100%;
+}
+
+.guide-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 12px 12px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.guide-avatar {
+  flex: none;
+  display: grid;
+  place-items: end center;
+  width: 44px;
+  height: 44px;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--yellow);
+}
+
+.guide-title {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+}
+
+.guide-title strong {
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+
+.guide-title span {
+  color: var(--text-muted);
+  font-size: 12.5px;
+}
+
+.guide-close {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.7);
+  transition: background 0.25s, color 0.25s;
+}
+
+.guide-close:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--white);
+}
+
+.guide-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 16px;
+}
+
+.guide-log {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.guide-msg {
+  max-width: 86%;
+  padding: 10px 15px;
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+
+.guide-msg--assistant {
+  align-self: flex-start;
+  border-radius: 18px 18px 18px 6px;
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.guide-msg--user {
+  align-self: flex-end;
+  border-radius: 18px 18px 6px 18px;
+  background: var(--yellow);
+  color: var(--navy);
+  font-weight: 600;
+  transform-origin: 100% 100%;
+}
+
+.guide-typing {
+  display: flex;
+  gap: 5px;
+  align-self: flex-start;
+  padding: 14px 16px;
+  border-radius: 18px 18px 18px 6px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.guide-typing span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.guide-options {
+  overflow: hidden;
+}
+
+.guide-options-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 4px 0 1px;
+}
+
+.guide-option {
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 13.5px;
+  font-weight: 600;
+  transition: background 0.25s, box-shadow 0.25s;
+}
+
+.guide-option:hover {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(255, 194, 14, 0.6);
+}
+
+.guide-option--go {
+  background: var(--yellow);
+  box-shadow: 0 8px 20px -10px rgba(255, 194, 14, 0.8);
+  color: var(--navy);
+}
+
+.guide-option--go:hover {
+  background: #ffcd3a;
+  box-shadow: 0 10px 24px -10px rgba(255, 194, 14, 0.95);
+}
+
+.guide-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px;
+  padding: 6px 6px 6px 14px;
+  border-radius: 18px;
+  background: rgba(0, 8, 24, 0.45);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  transition: box-shadow 0.25s;
+}
+
+.guide-form:focus-within {
+  box-shadow: inset 0 0 0 2px rgba(255, 194, 14, 0.75);
+}
+
+.guide-form input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: none;
+  color: var(--white);
+  font: inherit;
+  font-size: 16px;
+  outline: none;
+}
+
+.guide-form input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.guide-form button {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--yellow);
+  color: var(--navy);
+  transition: opacity 0.2s;
+}
+
+.guide-form button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.guide-close:focus-visible,
+.guide-option:focus-visible,
+.guide-yes:focus-visible,
+.guide-no:focus-visible,
+.guide-form button:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+}
+
+.guide-yes:focus-visible,
+.guide-no:focus-visible {
+  outline-color: var(--navy);
+}
+
+@media (max-width: 620px) {
+  .guide {
+    right: 16px;
+    bottom: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .guide-caret {
+    animation: none;
+  }
+}
+
+/* In the air it turns about its middle; on the ground the landing squash pivots on its feet. */
+.guide-eagle.is-flying {
+  transform-origin: 50% 50%;
+}

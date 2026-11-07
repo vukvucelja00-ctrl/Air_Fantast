@@ -22,9 +22,10 @@ import {
 import { AnimatePresence, motion, useInView, useReducedMotion } from 'motion/react'
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
 import { contact, mailtoLink } from '../lib/contact'
+import { onHelpTopic, type HelpTopic } from '../lib/helpBridge'
 import './TicketHelp.css'
 
-type TopicId = 'refund' | 'change' | 'contact'
+type TopicId = HelpTopic
 type Step = { icon: LucideIcon; title: string; text: string }
 type Topic = {
   id: TopicId
@@ -240,7 +241,11 @@ export function TicketHelp() {
       if (window.location.hash === CONTACT_HASH) setActive('contact')
     }
     window.addEventListener('hashchange', onHash)
-    return () => window.removeEventListener('hashchange', onHash)
+    const stopHelp = onHelpTopic(setActive)
+    return () => {
+      window.removeEventListener('hashchange', onHash)
+      stopHelp()
+    }
   }, [])
 
   const onTabKey = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
